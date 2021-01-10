@@ -6,7 +6,16 @@
     <description>Recent content in Posts on wonakk&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 09 Jan 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://21hak.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 10 Jan 2021 22:12:51 +0900</lastBuildDate><atom:link href="https://21hak.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Testforme</title>
+      <link>https://21hak.github.io/2021/01/10/test/</link>
+      <pubDate>Sun, 10 Jan 2021 22:12:51 +0900</pubDate>
+      
+      <guid>https://21hak.github.io/2021/01/10/test/</guid>
+      <description>This is test content</description>
+    </item>
+    
     <item>
       <title>Clean White Theme for Hugo</title>
       <link>https://21hak.github.io/post/readme/</link>
@@ -91,17 +100,6 @@
 &lt;p&gt;Kubernets 1.9版本引入了Admission Webhook(web 回调)扩展机制，通过Webhook,开发者可以非常灵活地对Kubernets API Server的功能进行扩展，在API Server创建资源时对资源进行验证或者修改。&lt;/p&gt;
 &lt;p&gt;使用webhook的优势是不需要对API Server的源码进行修改和重新编译就可以扩展其功能。插入的逻辑实现为一个独立的web进程，通过参数方式传入到kubernets中，由kubernets在进行自身逻辑处理时对扩展逻辑进行回调。&lt;/p&gt;
 &lt;p&gt;Istio 0.7版本就利用了Kubernets webhook实现了sidecar的自动注入。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>川西秘境探险</title>
-      <link>https://21hak.github.io/2018/05/01/may-day-jiulonghu/</link>
-      <pubDate>Tue, 01 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://21hak.github.io/2018/05/01/may-day-jiulonghu/</guid>
-      <description>&lt;h2 id=&#34;寻浮云牧场不遇&#34;&gt;寻浮云牧场不遇&lt;/h2&gt;
-&lt;p&gt;五一节前的一周内，几个朋友就纷纷坐不住了，一个二个不再安心上班，开始在微信群里讨论过节要到哪里耍。
-大家思来想去，最后决定还是去理县方向。因为根据多年自驾的经验，只要出了汶川，沿途都是风景。&lt;/p&gt;</description>
     </item>
     
     <item>

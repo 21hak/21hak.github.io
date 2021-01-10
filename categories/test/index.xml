@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Test on wonakk&#39;s Blog</title>
+    <link>https://21hak.github.io/categories/test/</link>
+    <description>Recent content in Test on wonakk&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 10 Jan 2021 22:12:51 +0900</lastBuildDate><atom:link href="https://21hak.github.io/categories/test/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Testforme</title>
+      <link>https://21hak.github.io/2021/01/10/test/</link>
+      <pubDate>Sun, 10 Jan 2021 22:12:51 +0900</pubDate>
+      
+      <guid>https://21hak.github.io/2021/01/10/test/</guid>
+      <description>This is test content</description>
+    </item>
+    
+  </channel>
+</rss>
