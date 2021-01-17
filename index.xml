@@ -17,15 +17,6 @@
     </item>
     
     <item>
-      <title>Clean White Theme for Hugo</title>
-      <link>https://21hak.github.io/post/readme/</link>
-      <pubDate>Wed, 09 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://21hak.github.io/post/readme/</guid>
-      <description>Clean White Theme for Hugo CleanWhite is a clean, elegant, but fully functional blog theme for Hugo. Here is a live demo site using this theme. It is based on huxblog Jekyll Theme and Clean Blog Jekyll Theme. These two upstream projects have done awesome jobs to create a blog theme, what I&amp;rsquo;m doing here is porting it to Hugo, of which I like the simplicity and the much faster</description>
-    </item>
-    
-    <item>
       <title></title>
       <link>https://21hak.github.io/search/placeholder/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -40,7 +31,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://21hak.github.io/top/about/</guid>
-      <description>Huabing Zhao is an ICT veteran with a passion for open source. He has a solid experience in the telecommunication and information technology industry for more than 17 years. Throughout his career, he has built a number of large-scale, cross-country OSS/BSS platforms/systems and operation tools, most of them are still running in productions. He loves open source and has been contributing to a variety of open source projects, including Istio(Service</description>
+      <description>이원학</description>
     </item>
     
     <item>
