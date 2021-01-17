@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="wonakk&#39;s Blog">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="https://21hak.github.io//img/home-bg-jeep.jpg">
+    <meta property="twitter:image" content="https://21hak.github.io//img/home-bg-jeep.jpg" />
+    
+
+    
+    <meta name="title" content="MarkDown 기본 사용법" />
+    <meta property="og:title" content="MarkDown 기본 사용법" />
+    <meta property="twitter:title" content="MarkDown 기본 사용법" />
+    
+
+    
+    <meta name="description" content="blog 작성을 위한 MarkDown 기본 사용법을 정리한다.">
+    <meta property="og:description" content="blog 작성을 위한 MarkDown 기본 사용법을 정리한다." />
+    <meta property="twitter:description" content="blog 작성을 위한 MarkDown 기본 사용법을 정리한다." />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="이원학, javascript, 원학, , 赵化冰的网络日志, 赵化冰的博客, Zhaohuabing Blog, 博客, 个人网站, 互联网, Web, React, PaaS, Istio, Kubernetes, 微服务, Microservice">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>MarkDown 기본 사용법-힘들지 않아</title>
+
+    <link rel="canonical" href="/2021/01/17/markdown/">
+
+    <link rel="stylesheet" href="/css/iDisqus.min.css"/>
+
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">wonakk&#39;s Blog</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                        
+                        <li>
+                            <a href="/categories/tech">tech</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/tips">tips</a>
+                        </li>
+                        
+                    
+                    
+		    
+                        <li><a href="/top/books/">BOOKS</a></li>
+                    
+                        <li><a href="/top/about/">ABOUT</a></li>
+                    
+
+                    
+		    <li>
+                        <a href="/search">SEARCH <img src="/img/search.png" height="15" style="cursor: pointer;" alt="Search"></a>
+		    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/home-bg-jeep.jpg')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/istio" title="Istio">
+                            Istio
+                        </a>
+                        
+                    </div>
+                    <h1>MarkDown 기본 사용법</h1>
+                    <h2 class="subheading">MarkDown</h2>
+                    <span class="meta">
+                        Posted by 
+                        
+                                wonakk&#39;s Blog
+                         
+                        on 
+                        Sunday, January 17, 2021
+                        
+                        
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <header>
+                    <h2>TOC</h2>
+                </header>
+                <nav id="TableOfContents">
+  <ul>
+    <li><a href="#reference">Reference</a></li>
+    <li><a href="#markdown이란">Markdown이란?</a>
+      <ul>
+        <li><a href="#1-제목header">1. 제목(Header)</a></li>
+      </ul>
+    </li>
+    <li><a href="#h1-헤더1">&lt;h1&gt; 헤더1</a>
+      <ul>
+        <li><a href="#h2-헤더2">&lt;h2&gt; 헤더2</a></li>
+      </ul>
+    </li>
+    <li><a href="#header-1-표현">Header 1 표현</a>
+      <ul>
+        <li><a href="#header-2-표현">Header 2 표현</a></li>
+        <li><a href="#문단-바꿈-줄-바꿈">문단 바꿈, 줄 바꿈</a></li>
+        <li><a href="#2강조emphasis">2.강조(Emphasis)</a></li>
+        <li><a href="#3-인용문blockquotes">3. 인용문(BlockQuotes)</a></li>
+      </ul>
+    </li>
+    <li><a href="#헤더1을-사용해보자">헤더1을 사용해보자</a>
+      <ul>
+        <li><a href="#4-목록lists">4. 목록(Lists)</a></li>
+        <li><a href="#5-코드code">5. 코드(Code)</a></li>
+        <li><a href="#6-코드-블럭code-block">6. 코드 블럭(Code Block)</a></li>
+        <li><a href="#7-수평선horizontal-rule">7. 수평선(Horizontal Rule)</a></li>
+        <li><a href="#9-이미지images">9. 이미지(Images)</a></li>
+        <li><a href="#11-html">11. HTML</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+                
+                <p>블로그를 만들어 놓고 관리해야지 관리해야지 하다가 일주일이 지난 지금에서야 시작했다.<br>
+첫 포스트로 마크다운 사용법에 대해 스스로 정리하면서 글을 작성해볼까 한다.</p>
+<h1 id="reference">Reference</h1>
+<p><a href="https://www.markdownguide.org/basic-syntax/">https://www.markdownguide.org/basic-syntax/</a></p>
+<h1 id="markdown이란">Markdown이란?</h1>
+<blockquote>
+<p>마크다운(markdown)은 일반 텍스트 기반의 경량 마크업 언어다. 일반 텍스트로 서식이 있는 문서를 작성하는 데 사용되며, 일반 마크업 언어에 비해 문법이 쉽고 간단한 것이 특징이다. HTML과 리치 텍스트(RTF) 등 서식 문서로 쉽게 변환되기 때문에 응용 소프트웨어와 함께 배포되는 README 파일이나 온라인 게시물 등에 많이 사용된다.</p>
+</blockquote>
+<p>위키백과에 나오는 정의다. README를 작성할 때 일반적으로 사용되고 지금과 같이 온라인 문서를 편집할 때도 사용된다고 한다. 일반 텍스트에 h1, h2, quote, bold 등등과 같은 효과를 주는데 사용되는 마크업언어로 이해했다.</p>
+<p>자주 사용될 것 같은 문법(Syntax)를 위주로 정리해보자.</p>
+<h2 id="1-제목header">1. 제목(Header)</h2>
+<p>문서를 작성할 때 제목은 꼭 필요한 녀석이다. 문서의 구조를 대략적으로 보여주고 어떤 내용인지 감을 수 있도록 한다.
+<code>&lt;h1&gt;</code>에서 <code>&lt;h6&gt;</code>까지로 표현이 가능하며 1에서 6으로 갈 수록 제목의 크기가 작아진다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown"><span style="font-weight:bold"># \&lt;h1&gt; 헤더1
+</span><span style="font-weight:bold"></span><span style="font-weight:bold">## \&lt;h2&gt; 헤더2
+</span><span style="font-weight:bold">### \&lt;h3&gt; 헤더3
+</span><span style="font-weight:bold">#### \&lt;h4&gt; 헤더4
+</span><span style="font-weight:bold">##### \&lt;h5&gt; 헤더5
+</span><span style="font-weight:bold">###### \&lt;h6&gt; 헤더6
+</span></code></pre></div><h1 id="h1-헤더1">&lt;h1&gt; 헤더1</h1>
+<h2 id="h2-헤더2">&lt;h2&gt; 헤더2</h2>
+<h3 id="h3-헤더3">&lt;h3&gt; 헤더3</h3>
+<h4 id="h4-헤더4">&lt;h4&gt; 헤더4</h4>
+<h5 id="h5-헤더5">&lt;h5&gt; 헤더5</h5>
+<h6 id="h6-헤더6">&lt;h6&gt; 헤더6</h6>
+<p><code>&lt;h1&gt;</code>과 <code>&lt;h2&gt;</code>는 아래와 같이 사용할 수 있다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">Header 1 표현
+===========
+</code></pre></div><h1 id="header-1-표현">Header 1 표현</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">Header 2 표현
+</code></pre></div><h2 id="header-2-표현">Header 2 표현</h2>
+<h2 id="문단-바꿈-줄-바꿈">문단 바꿈, 줄 바꿈</h2>
+<p>문서를 작성하다 보면 문단을 새로 생성해야하는 경우가 있다. 일반적으로 엔터를 한번 누르면 줄 바꿈이 되지만 마크다운에서는 <code>엔터를 2번</code> 입력하면 문단이 바뀐다. 그러면 새로운 <code>&lt;p&gt;</code> 태그를 여는 효과와 동일하다.</p>
+<p>줄바꿈은 <code>스페이스바를 2번</code> 입력하면 된다. 문단 바꿈이나 줄 바꿈이나 비슷하지만 문단 바꿈은 <code>&lt;p&gt;</code>태그를 열고 닫은 것이고 줄바꿈은 <code>&lt;br&gt;</code>태그를 입력한 것이다.</p>
+<h2 id="2강조emphasis">2.강조(Emphasis)</h2>
+<h3 id="1-bold">1. Bold</h3>
+<p>Bold는 글자를 굵게 처리해서 강조하는 효과를 준다. <code>**</code>나 <code>__</code>로 강조하고자 하는 위치를 감싸주면 된다.</p>
+<p><code>**강조강조** or __강조강조__</code><br>
+<strong>강조강조</strong> or <strong>강조강조</strong></p>
+<h3 id="2-italic">2. Italic</h3>
+<p>글자가 비스듬히 누워있는 Italic로 표현하고 싶은 경우 <code>*</code>문자나 <code>_</code>문자로 원하는 위치를 감싸주면 된다.
+<code>*비스듬히* or _비스듬히_</code><br>
+<em>비스듬히</em> or <em>비스듬히</em></p>
+<h3 id="3-bold--italic">3. Bold + Italic</h3>
+<p>Bold와 Italic을 동시에 표현하고자 하는 경우에는 Bold를 위한 <code>**</code> 또는 <code>__</code>를 Italic을 위한 <code>*</code> 또는 <code>_</code>와 합쳐주면 된다. 쉽게 말해 <code>***</code> 또는 <code>___</code>로 감싸주면 된다. <code>**_</code>와 같이 섞어서 사용도 가능하다.
+<code>***Bold and Italic*** or ___Bold and Italic___ or _**Mixed**_</code><br>
+<strong><em>Bold and Italic</em></strong> or <strong><em>Bold and Italic</em></strong> or <em><strong>Mixed</strong></em></p>
+<h2 id="3-인용문blockquotes">3. 인용문(BlockQuotes)</h2>
+<p>자신이 인용한 정보와 그 출처를 나타내야하는 경우가 있다. <code>&gt;</code>로 시작하면 해당 문장은 인용으로 표시가 된다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown"><span style="color:#ff79c6">&gt; </span><span style="text-decoration:underline">이것은 인용이야!
+</span></code></pre></div><blockquote>
+<p>이것은 인용이야!</p>
+</blockquote>
+<p>여러 문장을 인용으로 표기호가 싶으면 빈 문장도 <code>&gt;</code>로 시작하게 하면 된디ㅏ</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown"><span style="color:#ff79c6">&gt; </span><span style="text-decoration:underline">이것은 이용이야!
+</span><span style="text-decoration:underline"></span><span style="color:#ff79c6">&gt;
+</span><span style="color:#ff79c6"></span><span style="text-decoration:underline">&gt; 이것도 인용이야!
+</span></code></pre></div><blockquote>
+<p>이것은 이용이야!</p>
+<p>이것도 인용이야!</p>
+</blockquote>
+<p>인용문 안에서 마크다운을 사용할 수 있다. 단 모든 syntax를 사용할 수는 없다고 한다. 사용할 수 없는 syntax에 대해서는 정보가 나와있지 않다. 알아서 찾으란다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown"><span style="color:#ff79c6">&gt; </span><span style="text-decoration:underline">인용문 안에서
+</span><span style="text-decoration:underline"></span><span style="color:#ff79c6">&gt; </span><span style="text-decoration:underline"># 헤더1을 사용해보자
+</span></code></pre></div><blockquote>
+<p>인용문 안에서</p>
+<h1 id="헤더1을-사용해보자">헤더1을 사용해보자</h1>
+</blockquote>
+<h2 id="4-목록lists">4. 목록(Lists)</h2>
+<h3 id="1-ordered-lists">1. Ordered Lists</h3>
+<p>리스트는 평상시에 사용하듯이 <code>숫자. 내용</code>의 형태로 사용하면 된다. 이 때, 숫자는 1,2,3,4와 같은 순서가 아니어도 된다. 1,3,5,2 와 같은 순서로 작성해도 1,2,3,4로 표시된다</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown"><span style="color:#ff79c6">1.</span> 첫번째
+<span style="color:#ff79c6">2.</span> 두번째
+<span style="color:#ff79c6">3.</span> 세번째
+    <span style="color:#ff79c6">1.</span> 3-1
+    <span style="color:#ff79c6">2.</span> 3-2
+<span style="color:#ff79c6">100.</span> 네번째?
+</code></pre></div><ol>
+<li>첫번째</li>
+<li>두번째</li>
+<li>세번째
+<ol>
+<li>3-1</li>
+<li>3-2</li>
+</ol>
+</li>
+<li>네번째?</li>
+</ol>
+<h3 id="2-unordered-lists">2. Unordered Lists</h3>
+<p>Unordered lists를 나타낼 때 사용할 수 있는 문자는 <code>*</code>, <code>-</code>, <code>+</code>이다</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown"><span style="color:#ff79c6">*</span> 첫번째
+<span style="color:#ff79c6">-</span> 두번째
+    <span style="color:#ff79c6">1.</span> 이것은
+    <span style="color:#ff79c6">2.</span> 마크다운
++ 세번째
+</code></pre></div><ul>
+<li>첫번째</li>
+<li>두번째
+<ol>
+<li>이것은</li>
+<li>마크다운</li>
+</ol>
+</li>
+<li>세번째</li>
+</ul>
+<p>리스트 안에 다른 block들을 사용할 수 있다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown"><span style="color:#ff79c6">*</span> 리스트 안에
+<span style="color:#ff79c6">*</span> 인용문을 사용해보자
+<span style="color:#ff79c6">    &gt; </span><span style="text-decoration:underline">요것은 인용문
+</span><span style="text-decoration:underline"></span><span style="color:#ff79c6">*</span> 다시 리스트로!
+<span style="color:#ff79c6">*</span> 코드 블럭도 사용해보자
+    ```
+    요것은 코드 블럭
+    ```
+<span style="color:#ff79c6">*</span> 리스트 종료!
+</code></pre></div><ul>
+<li>리스트 안에</li>
+<li>인용문을 사용해보자
+<blockquote>
+<p>요것은 인용문</p>
+</blockquote>
+</li>
+<li>다시 리스트로!</li>
+<li>코드 블럭도 사용해보자
+<pre><code>요것은 코드 블럭
+</code></pre></li>
+<li>리스트 종료!</li>
+</ul>
+<h2 id="5-코드code">5. 코드(Code)</h2>
+<p>코드 강조를 하고 싶은 위치를 <!-- raw HTML omitted -->`<!-- raw HTML omitted -->로 감싼다.</p>
+<p><!-- raw HTML omitted -->`<!-- raw HTML omitted -->는 Backtick(Back Quote)이라고 한다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">html에는 <span style="color:#f1fa8c">`&lt;h1&gt;`</span> 태그가 있다.
+</code></pre></div><p>html에는 <code>&lt;h1&gt;</code> 태그가 있다.</p>
+<p>code로 강조한 문장 안에서 backtick을 표시하고 싶으면 아래와 같이 사용한다</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">``이 문장은``으로 감싸져 있습니다.``
+</code></pre></div><p><code>code 강조 안에서 `backtick`을 표시하자.</code></p>
+<h2 id="6-코드-블럭code-block">6. 코드 블럭(Code Block)</h2>
+<p>backtick을 이용한 코드 강조는 단어나 문장 단위에서 주로 사용한다.
+좀 더 긴 코드를 표현하고자 할 때는 code block을 사용한다. code block은 4개의 spaces를 입력하거나 <!-- raw HTML omitted --><code>&lt;/code&gt;로 감싸면 된다.   &lt;code&gt;</code><!-- raw HTML omitted -->뒤에 html, javascript 등과 같이 해당 code block에서 사용하는 언어를 명시하면 그에 맞게 syntax highlighting이 이뤄진다</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">    ```python
+    if __name__ == &#34;__main__&#34;
+        print(&#34;hello world&#34;)
+        print(&#34;Let&#39;s study markdonw!&#34;)
+    ```
+
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ff79c6">if</span> __name__ <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#34;__main__&#34;</span>
+    <span style="color:#ff79c6">print</span>(<span style="color:#f1fa8c">&#34;hello world&#34;</span>)
+    <span style="color:#ff79c6">print</span>(<span style="color:#f1fa8c">&#34;Let&#39;s study markdonw!&#34;</span>)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#ff79c6">a</span> <span style="color:#50fa7b">href</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;https://21hak.github.io/&#34;</span> <span style="color:#50fa7b">target</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;_blank&#34;</span>&gt;Blog&lt;/<span style="color:#ff79c6">a</span>&gt;
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#ff79c6">const</span> a <span style="color:#ff79c6">=</span> () =&gt; console.log(<span style="color:#f1fa8c">&#34;hello world!&#34;</span>)
+</code></pre></div><p>개인적으로 backtick을 사용하는게 조금 더 편리한듯 하다.</p>
+<h2 id="7-수평선horizontal-rule">7. 수평선(Horizontal Rule)</h2>
+<p>문서를 작성하다 내용의 구분을 명시적으로 표현하고자 할 경우 수평선으로 표시할 수 있다. (수평선이라고 하니 뭔가 바다 저 멀리 수평선을 의미하는것 같다.)<br>
+<code>*</code> 또는 <code>-</code> 또는 <code>_</code>를 3번 연속 입력하면 된다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">***
+---
+___
+```markdown
+
+요것도 해보고
+
+---
+
+저것도 해보고
+
+---
+
+다해보자
+
+---
+
+<span style="font-weight:bold">## 8. 링크(Links)
+</span><span style="font-weight:bold"></span>참고한 블로그의 링크 등을 표시할 떄, url을 그대로 보여주지 않고 원하는 텍스트로 표현해서 문장 사이에 자연스럽게 노출 시킬 수 있다.
+```markdown
+내 참된 스승은 바로 이녀석이다. [<span style="color:#ff79c6">My Teacher</span>](<span style="color:#50fa7b">https://www.google.com</span>)
+</code></pre></div><p>내 참된 스승은 바로 이녀석이다. <a href="https://www.google.com">My Teacher</a></p>
+<p>Email 링크와 같이 때로는 url을 그대로 보여주고 싶은 경우가 있다. 이럴 경우에는 <code>&lt;</code>로 감싸주면 된다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">&lt;<span style="color:#ff79c6">https:</span>//<span style="color:#50fa7b">21hak</span>.<span style="color:#50fa7b">github</span>.<span style="color:#50fa7b">io</span>/&gt;
+&lt;<span style="color:#ff79c6">imsth33</span>@<span style="color:#50fa7b">gmail</span>.<span style="color:#50fa7b">com</span>&gt;
+</code></pre></div><p>블로그: <a href="https://21hak.github.io/">https://21hak.github.io/</a><br>
+이메일: <a href="mailto:imsth33@gmail.com">imsth33@gmail.com</a></p>
+<p><strong>링크는 bold, italic, code 강조도 가능하다</strong></p>
+<pre><code>블로그: **&lt;https://21hak.github.io/&gt; **
+이메일: *&lt;imsth33@gmail.com&gt;*
+내 참된 스승은 바로 이녀석이다. **[My Teacher](https://www.google.com)
+이것은 페이크 [`code`][My Teacher](https://www.google.com)
+</code></pre><p>블로그: <strong><a href="https://21hak.github.io/">https://21hak.github.io/</a></strong><br>
+이메일: <em><a href="mailto:imsth33@gmail.com">imsth33@gmail.com</a></em><br>
+내 참된 스승은 바로 이녀석이다. <strong><a href="https://www.google.com">My Teacher</a></strong><br>
+이것은 페이크 <a href="#"><code>code</code></a></p>
+<h2 id="9-이미지images">9. 이미지(Images)</h2>
+<p>문서에 이미지 링크를 넣는다. 앞서 다룬 링크와 비슷하지만 앞에 <code>!</code>가 붙는다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">![<span style="color:#ff79c6">alternative 텍스트 자리</span>](<span style="color:#50fa7b">https://loadedlandscapes.com/wp-content/uploads/2019/07/lighting.jpg  &#34;이미지 title 자리&#34;</span>)
+</code></pre></div><p>
+  <figure>
+    <img src="https://loadedlandscapes.com/wp-content/uploads/2019/07/lighting.jpg" alt="alternative 텍스트 자리">
+    <center><figcaption>이미지 title 자리</figcaption></center>
+  </figure>
+
+</p>
+<h2 id="11-html">11. HTML</h2>
+<p>마크다운은 문서에 html tag을 이용해 마크다운 syntax를 표현할 수 있다.
+이미지를 예를 들면 <code>&lt;img&gt;</code>를 이용해 이미지를 문서에 나타낼 수 있다.
+<!-- raw HTML omitted --></p>
+
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/readme/" data-toggle="tooltip" data-placement="top" title="Clean White Theme for Hugo">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                </ul>
+
+                
+<div id="disqus-comment"></div>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/docker" title="docker">
+                            docker
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/istio" title="istio">
+                            istio
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/kubernetes" title="kubernetes">
+                            kubernetes
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/microservice" title="microservice">
+                            microservice
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/security" title="security">
+                            security
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/service-mesh" title="service-mesh">
+                            service-mesh
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/tips" title="tips">
+                            tips
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="wonakk&#39;s Blog" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:imsth33@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/21hak">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/21hak/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+                </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; wonakk&#39;s Blog 2021
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+</body>
+</html>

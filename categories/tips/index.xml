@@ -6,7 +6,16 @@
     <description>Recent content in Tips on wonakk&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 24 May 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://21hak.github.io/categories/tips/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 17 Jan 2021 17:12:51 +0900</lastBuildDate><atom:link href="https://21hak.github.io/categories/tips/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MarkDown 기본 사용법</title>
+      <link>https://21hak.github.io/2021/01/17/markdown/</link>
+      <pubDate>Sun, 17 Jan 2021 17:12:51 +0900</pubDate>
+      
+      <guid>https://21hak.github.io/2021/01/17/markdown/</guid>
+      <description>블로그를 만들어 놓고 관리해야지 관리해야지 하다가 일주일이 지난 지금에서야 시작했다. 첫 포스트로 마크다운 사용법에 대해 스스로 정리하면서 글을 작성해볼까 한다</description>
+    </item>
+    
     <item>
       <title>Everything about Setting Up My Ubuntu Desktop</title>
       <link>https://21hak.github.io/2018/05/24/set_up_my_ubuntu_desktop/</link>
