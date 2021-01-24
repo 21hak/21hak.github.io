@@ -15,15 +15,15 @@
     
 
     
-    <meta name="title" content="" />
-    <meta property="og:title" content="" />
-    <meta property="twitter:title" content="" />
+    <meta name="title" content="Typescript Utility" />
+    <meta property="og:title" content="Typescript Utility" />
+    <meta property="twitter:title" content="Typescript Utility" />
     
 
     
-    <meta name="description" content="함께 일하고픈 프론트엔트 개발자가 될래">
-    <meta property="og:description" content="함께 일하고픈 프론트엔트 개발자가 될래" />
-    <meta property="twitter:description" content="함께 일하고픈 프론트엔트 개발자가 될래" />
+    <meta name="description" content="타입스크립트의 유틸리티 타입들에 대해 알아보자.">
+    <meta property="og:description" content="타입스크립트의 유틸리티 타입들에 대해 알아보자." />
+    <meta property="twitter:description" content="타입스크립트의 유틸리티 타입들에 대해 알아보자." />
     
 
     
@@ -34,9 +34,9 @@
     <meta name="keyword"  content="이원학, javascript, 원학, , 赵化冰的网络日志, 赵化冰的博客, Zhaohuabing Blog, 博客, 个人网站, 互联网, Web, React, PaaS, Istio, Kubernetes, 微服务, Microservice">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>힘들지 않아</title>
+    <title>Typescript Utility-힘들지 않아</title>
 
-    <link rel="canonical" href="/search/placeholder/">
+    <link rel="canonical" href="/2021/01/24/typescript/utility-types">
 
     <link rel="stylesheet" href="/css/iDisqus.min.css"/>
 
@@ -165,16 +165,20 @@
                 <div class="post-heading">
                     <div class="tags">
                         
+                        <a class="tag" href="/tags/typescript" title="typescript">
+                            typescript
+                        </a>
+                        
                     </div>
-                    <h1></h1>
-                    <h2 class="subheading"></h2>
+                    <h1>Typescript Utility</h1>
+                    <h2 class="subheading">이미 만들어진 멋진 타입들</h2>
                     <span class="meta">
                         Posted by 
                         
                                 wonakk&#39;s Blog
                          
                         on 
-                        Monday, January 1, 0001
+                        Sunday, January 24, 2021
                         
                         
                         
@@ -202,14 +206,95 @@
                 <header>
                     <h2>TOC</h2>
                 </header>
-                <nav id="TableOfContents"></nav>
+                <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#partial">Partial</a></li>
+        <li><a href="#pick">Pick</a></li>
+        <li><a href="#omit">Omit</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
                 
-                
+                <p>인프런에서 <a href="https://www.inflearn.com/course/%ED%83%80%EC%9E%85%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%8B%A4%EC%A0%84">타입스크립트 강의</a>를 들으면서 배운 내용을 간단하게 정리해보고자 한다.</p>
+<p>아직 강의를 다 듣지는 않았지만 전반적인 흐름은 JS 프로젝트에 TS를 적용하는 과정으로 진행되는듯 한다. 중간 중간 알면 좋은 내용을 강사님이 찝어주셔서 듣는 재미가 쏠쏠하다. 그 중에 하나가 타입스크립트의 <code>Utility</code> 타입이다.</p>
+<p>타입스크립트 공식 문서에 가면 Advanced Types에 <a href="https://www.typescriptlang.org/docs/handbook/utility-types.html">유틸리티 타입(Uitlity Types)</a>가 있다. 전부 다루지는 않았고, <code>Partial</code>, <code>Pick</code>, <code>Omit</code> 3가지 유틸리티 타입만 다루었다.</p>
+<h2 id="partial">Partial</h2>
+<p><code>Partial</code>은 특정 타입이 가지는 속성의 부분 집합을 가지는 타입을 정의하는데 사용된다.</p>
+<p>예를 들어 아래와 같은 속성을 가지는 <code>User</code>모델이 있다고 하자.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#ff79c6">interface</span> User {
+  id: <span style="color:#8be9fd">string</span>;
+  name: <span style="color:#8be9fd">string</span>;
+  mobile: <span style="color:#8be9fd">string</span>;
+  address: <span style="color:#8be9fd">string</span>;
+  email: <span style="color:#8be9fd">string</span>;
+}
+</code></pre></div><p>특정 유저의 정보를 업데이트 하는 <code>updateUser</code>이라는 함수를 작성하고자 한다. 해당 함수는 <code>User</code> 모델의 특정 속성을 입력 받았을 때, 해당 필드를 업데이트 하게 된다. <code>updateUser</code> 함수의 파라미터는 <code>User</code> 모델이 가지는 속성들의 <strong>부분 집합</strong>이 되고 아래와 같이 표현할 수 있다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#8be9fd;font-style:italic">function</span> updateUser(payload<span style="color:#ff79c6">:</span> {
+  id?: <span style="color:#8be9fd">string</span>;
+  name?: <span style="color:#8be9fd">string</span>;
+  mobile?: <span style="color:#8be9fd">string</span>;
+  address?: <span style="color:#8be9fd">string</span>;
+  email?: <span style="color:#8be9fd">string</span>;
+});
+</code></pre></div><p>예시의 경우에 <code>User</code>모델의 속성이 그렇게 많지 않지만 속성이 많은 큰 모델일 경우 타입 정의가 길어지게 된다. 이 때, <code>Partial</code>을 사용하면 다음과 같이 함수를 정의할 수 있다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#8be9fd;font-style:italic">function</span> updateUser(payload: <span style="color:#8be9fd">Partial</span>&lt;<span style="color:#ff79c6">User</span>&gt;);
+</code></pre></div><h2 id="pick">Pick</h2>
+<p><code>Pick</code>은 특정 타입에서 필요한 속성을 선택하여 새로운 타입을 정의하는데 사용된다.
+<code>Product</code> 타입이 아래와 같이 정의되어 있다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#ff79c6">interface</span> Product {
+  id: <span style="color:#8be9fd">string</span>;
+  name: <span style="color:#8be9fd">string</span>;
+  quantity: <span style="color:#8be9fd">string</span>;
+  description: <span style="color:#8be9fd">string</span>;
+  thumbnail: <span style="color:#8be9fd">string</span>;
+}
+</code></pre></div><p>제품들의 이름(<code>name</code>)과 이미지(<code>thumbnail</code>)만 보여주기 위해 다음과 같은 함수를 작성하려고 한다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#8be9fd;font-style:italic">function</span> showProducts() {
+  <span style="color:#6272a4">// display products
+</span><span style="color:#6272a4"></span>}
+</code></pre></div><p><code>showProducts</code>함수의 파라미터는 <code>Product</code> 타입의 <code>name</code>과 <code>thumbnail</code> 속성만 가지고 있으면 된다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#ff79c6">type</span> briefProduct <span style="color:#ff79c6">=</span> {
+  name: <span style="color:#8be9fd">string</span>;
+  thumbnail: <span style="color:#8be9fd">string</span>;
+};
+<span style="color:#8be9fd;font-style:italic">function</span> showProducts(products: <span style="color:#8be9fd">briefProduct</span>[]) {
+  <span style="color:#6272a4">// display products
+</span><span style="color:#6272a4"></span>}
+
+<span style="color:#6272a4">//or
+</span><span style="color:#6272a4">// function showProducts(
+</span><span style="color:#6272a4">//     products: { name: string; thumbnail:string[] }) {
+</span><span style="color:#6272a4">//   // display products
+</span><span style="color:#6272a4">// }
+</span></code></pre></div><p><code>briefProduct</code>라는 새로운 타입을 정의해서 <code>showProducts</code>함수의 파라미터 타입으로 지정할 수 있지만 <code>Pick</code> 타입을 사용하여 불필요한 타입 정의 없이 간단하게 표현할 수 있다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#8be9fd;font-style:italic">function</span> showProducts(
+    products: <span style="color:#8be9fd">Pick</span>&lt;<span style="color:#ff79c6">Product</span>, &#34;<span style="color:#50fa7b">name</span>&#34;|&#34;<span style="color:#50fa7b">thumbnail</span>&#34;&gt;[]) {
+  <span style="color:#6272a4">// display products
+</span><span style="color:#6272a4"></span>}
+</code></pre></div><p>제네릭 타입에 대상이 되는 타입을 입력하고, 그 뒤에는 사용할 속성을 <code>or</code>로 넣어주면 된다.</p>
+<h2 id="omit">Omit</h2>
+<p><code>Omit</code>은 <code>Pick</code>과 비슷하지만 반대로 기존 타입에서 특정 속성을 제외하는 데 사용된다.
+위의 <code>showProducts</code> 예시를 <code>Omit</code> 타입을 사용해서 정의하면 다음과 같다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#8be9fd;font-style:italic">function</span> showProducts(
+    products: <span style="color:#8be9fd">Omit</span>&lt;<span style="color:#ff79c6">Product</span>, &#34;<span style="color:#50fa7b">id</span>&#34;|&#34;<span style="color:#50fa7b">quantity</span>&#34;|&#34;<span style="color:#50fa7b">description</span>&#34;&gt;[]) {
+  <span style="color:#6272a4">// display products
+</span><span style="color:#6272a4"></span>}
+</code></pre></div><p><code>Product</code> 타입에서 <code>name</code>과 <code>thumbnail</code>만 사용하기 위해 나머지 <code>id</code>, <code>quantity</code>, <code>description</code>을 <code>Omit</code>으로 제외시킨다.</p>
+<p>그 외에 <code>Readonly</code>, <code>Record</code>, <code>Exclude</code>와 같은 유틸리티 타입이 있는데, 나머지는 추가로 공부하고 더 추가해야겠다.</p>
+
 
                 
 
                 <hr>
                 <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2021/01/17/markdown/" data-toggle="tooltip" data-placement="top" title="MarkDown 기본 사용법">&larr;
+                            Previous Post</a>
+                    </li>
                     
                     
                 </ul>
