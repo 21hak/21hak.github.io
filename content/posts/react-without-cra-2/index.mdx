@@ -1,0 +1,149 @@
+---
+title: "CRA 없이 React 프로젝트 만들기(2)(w/Typescript)"
+date: 2022-01-12
+slug: "/react-project-without-cra-2"
+tags:
+  - Babel
+  - Webpack
+  - React
+  - Typescript
+---
+
+[이전 게시물](../react-project-without-cra-1)
+
+# Typescript
+
+이제 프로젝트에 Typescript를 추가해보자. Typescript는 Javascript에 타입 시스템을 추가한 것이다. 따라서 Typescript로 작성된 코드는 Javascript로의 Transpile 과정을 거친 뒤 Webpack을 통해 번들링 된다. 앞서 나는 이미 Transpiler로 Babel을 이용하고 있으므로, Babel을 이용해 Typescript 세팅을 해보겠다.
+
+# babel-loader
+
+webpack에서 타입스크립트를 읽을 수 있는 loader는 2가지가 있다. babel을 사용하는 `babel-loader`와 `ts-loader`이다. 이 중, 나는 먼저 `babel-loader`을 이용해서 세팅해보겠다. 먼저 `babel-loader`를 설치하자. babel이 react 문법을 transpile하도록 해주는 `@babel/preset-react`를 같이 설치했듯이 typescript를 transpile하도록 해주는 `@babel/preset-typescript`를 같이 설치한다.
+
+```shell
+yarn add --dev babel-loader @babel/preset-typescript
+```
+
+`babel-loader`와 `@babel/preset-typescript`를 설치한 뒤, `.babelrc`에 `preset-typescript`를 추가한다.
+
+```json
+{
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-react",
+    "@babel/preset-typescript" // 추가
+  ]
+}
+```
+
+# VS CODE 설정 및 파일 변경
+
+Typescript를 사용하는 주된 이유는 개발 시 타입 체킹을 통한 코드 안정성이다. 따라서 개발자가 코드를 작성하는 환경이 Typescript를 지원하도록 설정해야한다. 나는 vscode를 사용하기 때문에 vscode를 기준으로 설명하겠다.
+
+vscode에서 typescript를 사용하기 위해서는 Typescript Compiler(`tsc`)를 설치해야 한다. 패키지 매니저로 `typescript`를 설치하면 된다. Typescript는 개발 과정과 빌드시에만 사용되고 실제 production bundle에는 필요가 없으므로 devDependencies로 설치한다. 참고로 vscode 내부에서 task runner가 `tsc`를 이용해 타입 정보를 제공한다.
+
+```shell
+yarn add --dev typescript
+npx tsc --version // typescript compiler 버전 확인
+```
+
+이제 기존 `js` 파일들을 `ts`, `tsx` 파일로 변경하자. 기존에 `JSX` 문법이 사용되었으면 `tsx`로, 그렇지 않으면 `ts`로 변경하면 된다.
+
+```text
+App.js => App.tsx
+index.js => index.tsx
+```
+
+변경 후 `tsc`를 이용해 수동으로 ts파일을 js파일로 transpile할 수 있다.
+
+```shell
+# 프로젝트 root에서 실행
+npx tsc src/App.tsx
+```
+
+아무 설정 없이 위 명령어로 transpile를 하면 `error TS17004: Cannot use JSX unless the '--jsx' flag is provided.` 이런 에러가 발생한다. `JSX` 문법을 transpile하려면 `--jsx` 옵션을 추가하라는 내용이다.
+
+```shell
+npx tsx src/App.tsx --jsx react
+```
+
+위와 같이 `JSX`는 react로 문법으로 인식을 해서 transpile하라고 시키면
+
+이 tsx 파일이
+
+```ts
+import React from "react";
+function App() {
+  return <div> Hello from React World </div>;
+}
+export default App;
+```
+
+아래와 같이 바뀐다.
+
+```js
+"use strict";
+exports.__esModule = true;
+var react_1 = require("react");
+function App() {
+  return react_1["default"].createElement(
+    "div",
+    null,
+    " Hello from React World "
+  );
+}
+exports["default"] = App;
+```
+
+## tsconfig.json
+
+vscode에서 타입을 추론할 때 `--jsx`와 같은 옵션을 추가해주기 위해서 `tsconfig.json`파일을 사용해 설정을 추가한다. 프로젝트의 root 디렉토리에 `tsconfig.json`을 만들고 아래와 같이 설정을 추가하자.
+
+```json
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "jsx": "react",
+    "sourceMap": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}
+```
+
+## webpack.config.js
+
+이제 개발환경을 구성 했으니, 웹팩을 이용해서 번들을 빌드해보자. 먼저 `index.js`가 `index.tsx`로 바뀌었으니 entry를 `./src/index.tsx`로 바꿔주자. 그리고 js파일이 아닌 `ts`, `tsx` 파일들을 `babel-loader`로 이용하여 transpile 할 것이기 때문에 `rules`도 아래와 같이 바꿔주자.
+
+```js
+// webpack.config.js
+...
+resolve: {
+    alias: {
+      components: path.resolve(__dirname, "src"),
+    },
+    extensions: [".ts", ".tsx", ".js"],
+  },
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        include: [path.resolve(__dirname, "src")],
+        use: ["babel-loader"],
+      },
+    ],
+  },
+...
+```
+
+여기까지 한 뒤, `yarn run dev`나 `yarn run build`를 실행하면, typescript 파일들이 js파일로 잘 번들링 되는것을 확인할 수 있다. 여기 까지 내가한 것은 아래와 같다.
+1. 리액트 기본 프로젝트 구조 구성
+2. babel을 이용한 react 문법 transpiling
+3. webpack을 이용한 번들링
+4. vscode typescript 설정
+4. bable-loader을 이용한 typescript transpiling
+
+
+여기 까지면 cra 없이 typescript 기반 react 프로젝트 생성이라는 주요 목표는 달성했다. 
+
+이제 앞에서 언급한 `babel-loader` 말고 `ts-loader`를 이용하여 typescript를 추가해보자. 
