@@ -1,0 +1,249 @@
+---
+title: "영상 자동 실행을 IntersectionObserver를 이용해 구현하기"
+date: 2022-01-29
+slug: "/intersection-observer-video"
+tags:
+  - React
+  - IntersectionObserver
+  - Video
+  - Vimeo
+---
+
+---
+
+유튜브나 인스타그랩을 보면 동영상이 내 화면에 나오면 자동으로 실행이 된다. 이번에는 동영상이 뷰에 들어오면 실행이 되고 뷰에서 벗어나면 멈추도록 하는 컴포넌트를 구현해보고자 한다.
+특정 컴포넌트가 뷰에 노출이 된지 확인을 위해서는 `Intersection Observer API` 라는 WebAPI를 이용한다.
+
+# IntersectionObserver
+
+Intersection Obsever에 대한 간단한 설명
+
+# Vimeo
+
+비메오는 사용자가 직접 제작한 동영상을 업로드하고 공유하며 볼 수 있는 동영상 공유 웹사이트이다. Vimeo에 영상을 올리면 해당 영상에 접근할 수 있는 링크가 생성된다. Vimeo 영상 재생 페이지에 가면 공유 버튼을 찾을 수 있다. 공유 버튼을 누르면 아래와 같은 모달이 뜨는데, 여기서 임베드를 보면 `iframe` 태그를 통한 공유를 확인할 수 있다. 영상 링크만 있으면 된다. 임베드 시에 추가할 수 있는 설정에 대한 정보는 [여기서](https://developer.vimeo.com/player/sdk/embed) 확인할 수 있다.
+![vimeo-share](./vimeo-share.png)
+
+## Vimeo SDK 추가
+
+나는 Vimeo 영상을 이용해서 예제 코드를 작성할 예정이다. 물론 youtube([iframe api 문서](https://developers.google.com/youtube/iframe_api_reference?hl=ko)) 등 다른 동영상 플랫폼을 이용해도 된다.
+Vimeo는 친절하게도 vimeo 영상을 control할 수 있는 sdk를 제공한다.([문서](https://developer.vimeo.com/player/sdk/basics)) CDN을 통해서 load할 수도 있고, npm SDK로 설치할 수 있다. 나는 CDN을 통해 사용해보겠다.
+
+`<script async src="https://player.vimeo.com/api/player.js"></script>` 코드를 `index.html`에 삽입해주자.
+`Vimeo`라는 객체를 사용하기 때문에, `types.d.ts` 파일을 만들어 아래와 같이 타입을 정의해주자
+
+```ts
+declare var Vimeo: any;
+```
+
+# VideoPlayer 컴포넌트 구현
+
+구현하고자 하는 VideoPlayer 컴포넌트는 아래의 기능 요건을 충족해야한다.
+
+1. 화면에서 30% 이상 보이면 자동 실행.
+2. 화면에서 30% 미만으로 보이는 경우에는 자동 일시 정지.
+
+## 빈 VideoPlayer 컴포너트 구현
+
+먼저 VideoPlayer라는 빈 컴포넌트를 작성한다. 프로젝트는 cra를 이용해서 생성했고, styling은 emotion을 이용한다.
+
+```tsx
+// VideoPlayer.tsx
+import React from "react";
+import { VideoPlayerContainer } from "./VideoPlayer";
+
+interface IVideoPlayerProps {
+  videoUrl: string;
+}
+
+export const VideoPlayer: React.FC<IVideoPlayerProps> = function VideoPlayer({
+  videoUrl,
+}) {
+  return (
+    <VideoPlayerContainer>
+      <iframe src={videoUrl} suppressContentEditableWarning={true} />
+    </VideoPlayerContainer>
+  );
+};
+```
+
+```ts
+// VideoPlayer.ts
+import styled from "@emotion/styled";
+
+export const VideoPlayerWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  height: auto;
+  padding-top: calc(9 / 16 * 100%);
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+`;
+```
+
+VideoPlayer의 Wrapper 컴포넌트는 위와 같이 작성한다. 굳이 `position:relative`와 `padding-top` 속성을 준 이유는, 화면의 width에 맞게 영상의 가로 길이를 설정하기 위해서다.
+
+## IntersectionObserver 연결
+
+IntersectionObserver가 VideoPlayer를 observer할 수 있도록 VideoPlayer 컴포넌트 내부에 있는 iframe 엘리먼트에 연결한다. VideoPlayer가 랜더될 때, 한번만 연결 하면 된다.
+
+```tsx
+import React, { useEffect, useRef } from "react";
+import { VideoPlayerContainer } from "./VideoPlayer.style";
+
+interface IVideoPlayerProps {
+  videoUrl: string;
+}
+
+export const VideoPlayer: React.FC<IVideoPlayerProps> = function VideoPlayer({
+  videoUrl,
+}) {
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const observer = useRef<IntersectionObserver>();
+  const handleIntersection = () => {
+    console.log("handleIntersection called");
+  };
+
+  /**
+   * iframeRef.current 를 observe 하도록 한다.
+   * VideoPlayer 컴포넌트의 0.3, 0.7 지점을 지날 때 마다 handleIntersection이 호출되는 것을 확인할 수 있다.
+   */
+  useEffect(() => {
+    if (iframeRef.current) {
+      if (!observer.current) {
+        observer.current = new IntersectionObserver(handleIntersection, {
+          threshold: [0.3, 0.7],
+        });
+        iframeRef.current && observer.current.observe(iframeRef.current);
+      }
+    }
+  }, [iframeRef.current]);
+
+  return (
+    <VideoPlayerContainer>
+      <iframe
+        src={videoUrl}
+        suppressContentEditableWarning={true}
+        ref={iframeRef}
+      />
+    </VideoPlayerContainer>
+  );
+};
+```
+
+## handleIntersection 구현
+
+`VideoPlayer` 컴포넌트의 30%, 70% 만큼 보여졌을 때, `handleIntersection`이 호출되는 것을 확인했다. 이제 실제 `handleIntersection`을 구현해야한다. `IntersectionObserver()` constructor는 첫번째 파라미터로 callback 함수를 받는다. 공식 문서에 따르면 callback함수는 `IntersectionObserverEntry` 리스트와 `observer`를 인자로 받는다. 아래와 같은 형태로 구현이 된다.
+
+```ts
+let callback = (
+  entries: IntersectionObserverEntry[],
+  observer: IntersectionObserver
+) => {
+  entries.forEach((entry) => {});
+};
+```
+
+`IntersectionObserverEntry`는 여러 property를 가지고 있는데, 모두 사용할 필요는 없으므로 작성한 코드와 함께 사용된 property에 대해 간단히 설명하겠다. 자세한 내용은 [공식문서](https://developer.mozilla.org/ko/docs/Web/API/Intersection_Observer_API)에서 쉽게 확인할 수 있다.
+
+구현 전에 고려해야할 것이 있는데 현재 `IntersectionObserver`를 생성할 때, `threshold`를 `[0.3, 0.7]` 로 주었다. 이렇게 되면 아래의 경우가 가능하게 된다.
+
+1. 위에서 아래로 스크롤 하며 Viewport에 컴포넌트가 보여질 때
+2. 위에서 아래로 스크롤 하며 Viewport에서 벗어날 때
+3. 아래서 위로 스크롤 하며 Viewport에 컴포넌트가 보여질 때
+4. 아래서 위로 스크롤 하며 Viewport에서 벗어날 때
+
+여기서 스크롤의 방향 여부에 따라 동작이 달라지지 않기 때문에, 컴포넌트가 보여질때와 벗어날 때만 구분을 하면 된다. 이를 위해 intersection이 발생할 때의 영역을 저장했다가, 다음 intersection이 발생했을 때 비교하여 viewport에 진입하고 있는지, 벗어나고 있는지를 구분한다. 구현 코드는 아래와 같다.
+
+```ts
+const previousRatio = useRef<number>(0); // 초기값은 0으로 한다.
+
+const handleIntersection = (
+  entries: IntersectionObserverEntry[],
+  observer: IntersectionObserver
+) => {
+  entries.forEach((entry) => {
+    const { intersectionRatio: currentRatio, isIntersecting } = entry;
+    // Scrolling down/up
+    if (isIntersecting) {
+      if (currentRatio > previousRatio.current) {
+        // 이전에 보여지고 있던 영역보다 현재 시점의 영역이 더 크면 VideoPlayer가 viewport에 진입하고 있는 것으로 판단
+        console.log("entering");
+      } else {
+        // 이전에 보여지고 있던 영역보다 현재 시점의 영역이 더 작으면 VideoPlayer가 viewport에서 벗어나고 있는 것으로 판단.
+        console.log("leaving");
+      }
+    }
+    previousRatio.current = currentRatio;
+  });
+};
+```
+
+## Vimeo Handling 코드 구현
+
+먼저 Vimeo Player 객체에 iframe을 연결한다. 공식 문서의 예제를 참고한다.
+
+```ts
+const player = useRef<any>(null);
+
+useEffect(() => {
+  if (iframeRef.current) {
+    player.current = new Vimeo.Player(iframeRef.current);
+  }
+}, [iframeRef.current]);
+```
+
+`handleInteraction`을 다음과 같이 수정한다
+
+```ts
+const handleIntersection = (
+  entries: IntersectionObserverEntry[],
+  observer: IntersectionObserver
+) => {
+  entries.forEach(async (entry) => {
+    const { intersectionRatio: currentRatio, isIntersecting } = entry;
+    // Scrolling down/up
+    if (isIntersecting) {
+      if (currentRatio > previousRatio.current) {
+        // Viewport 진입하는 경우
+        const isPaused = await player.current.getPaused(); // 영상이 일시정지 상태인지 확인한다.
+        if (isPaused) {
+          // 일시 정지 상태이면 영상을 실행한다
+          player.current.play();
+        }
+      } else if (currentRatio < previousRatio.current) {
+        // Viewport 벗어나는 경우
+
+        const isPaused = await player.current.getPaused();
+        if (!isPaused) {
+          // 재생중이면 영상을 일시정지 한다.
+          player.current.pause();
+        }
+      }
+    }
+    previousRatio.current = currentRatio;
+  });
+};
+```
+
+위와 같이 작성하면 `VideoPlayer` 컴포넌트가 어느 정도 의도한 데로 동작하는 것을 확인할 수 있다. 하지만 자세히 보면 뭔가 이상하다는 것을 알 수 있다.
+![leaving](./leaving.png)
+Viewport에서 벗어날 때, 30%가 아닌 70%가 남은 경우에 영상이 멈춘다. 예상대로라면 `previousRatio.current`도 0.7, `currentRatio`도 0.7이기 때문에 아무것도 실행되지 않아야 정상이다. 각 값을 찍어 확인하면 아래 처럼 찍히는 것을 확인할 수 있다.
+![leaving2](./leaving2.png)
+
+왜 이런 값이 찍히는걸까?
+
+## Intersection Observer
+문서에 보면 이런 내용이 있다.
+> 정확히 몇 픽셀이 겹쳐졌고 어떠한 픽셀이 겹쳐졌는지 Intersection Observer API 가 알려줄 수 없습니다. 그러나 "N% 정도 교차하는 경우 상호작용이 이루어져야한다." 와 같은 더 일반적인 사용 사례를 다룰 수 있습니다.
+
+
+
+# 참고
+
+https://stackoverflow.com/questions/61951380/intersection-observer-fails-sometimes-when-i-scroll-fast
+https://developer.mozilla.org/ko/docs/Web/API/Intersection_Observer_API
