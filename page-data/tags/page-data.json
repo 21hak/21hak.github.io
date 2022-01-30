@@ -1,5 +1,5 @@
 {
     "componentChunkName": "component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-tags-query-tsx",
     "path": "/tags",
-    "result": {"data":{"allPost":{"group":[{"fieldValue":"Babel","totalCount":3},{"fieldValue":"Dark Arts","totalCount":1},{"fieldValue":"Highlight","totalCount":1},{"fieldValue":"Novel","totalCount":2},{"fieldValue":"React","totalCount":3},{"fieldValue":"Tutorial","totalCount":1},{"fieldValue":"Typescript","totalCount":3},{"fieldValue":"Webpack","totalCount":3}]}},"pageContext":{}},
+    "result": {"data":{"allPost":{"group":[{"fieldValue":"Babel","totalCount":3},{"fieldValue":"Dark Arts","totalCount":1},{"fieldValue":"Highlight","totalCount":1},{"fieldValue":"IntersectionObserver","totalCount":1},{"fieldValue":"Ionic","totalCount":1},{"fieldValue":"Novel","totalCount":2},{"fieldValue":"React","totalCount":4},{"fieldValue":"Tutorial","totalCount":1},{"fieldValue":"Typescript","totalCount":3},{"fieldValue":"Video","totalCount":1},{"fieldValue":"Vimeo","totalCount":1},{"fieldValue":"Webpack","totalCount":3}]}},"pageContext":{}},
     "staticQueryHashes": ["2744905544","3090400250","318001574"]}

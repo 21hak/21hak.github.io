@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-tag-query-tsx",
+    "path": "/tags/ionic",
+    "result": {"data":{"allPost":{"nodes":[{"slug":"/intersection-observer-video","title":"영상 자동 실행을 IntersectionObserver를 이용해 구현하기","date":"29.01.2022","excerpt":"…","timeToRead":4,"description":null,"tags":[{"name":"React","slug":"react"},{"name":"IntersectionObserver","slug":"intersection-observer"},{"name":"Video","slug":"video"},{"name":"Vimeo","slug":"vimeo"},{"name":"Ionic","slug":"ionic"}]}]}},"pageContext":{"slug":"ionic","name":"Ionic","formatString":"DD.MM.YYYY"}},
+    "staticQueryHashes": ["2744905544","3090400250","318001574"]}
